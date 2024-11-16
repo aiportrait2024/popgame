@@ -3,88 +3,295 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PopGame - Online Mini Games Collection</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Popgame - Best Online Games Collection</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
 
-   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-J4XLTH3Q44"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+        :root {
+            --primary-color: #ff6b00;
+            --secondary-color: #ff9100;
+            --text-color: #333;
+            --light-bg: #fff8f3;
+        }
 
-  gtag('config', 'G-J4XLTH3Q44');
-</script>
+        body {
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+        }
+
+        .brand {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            text-align: center;
+        }
+
+        .brand p {
+            font-size: clamp(0.9rem, 2vw, 1rem);
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            padding: 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .game-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(255, 107, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(255, 107, 0, 0.2);
+        }
+
+        .game-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .game-card h3 {
+            padding: 1rem;
+            text-align: center;
+            color: var(--text-color);
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+        }
+
+        .advantages {
+            background: var(--light-bg);
+            padding: 3rem 1rem;
+            margin-top: 3rem;
+        }
+
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .advantage-card {
+            text-align: center;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(255, 107, 0, 0.1);
+        }
+
+        .advantage-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+        }
+
+        .advantage-card p {
+            font-size: clamp(0.9rem, 2vw, 1rem);
+        }
+
+        .faq {
+            max-width: 800px;
+            margin: 4rem auto;
+            padding: 0 1rem;
+        }
+
+        .faq-item {
+            margin-bottom: 1.5rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(255, 107, 0, 0.1);
+        }
+
+        .faq-item h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+        }
+
+        .faq-item p {
+            font-size: clamp(0.9rem, 2vw, 1rem);
+        }
+
+        footer {
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 4rem;
+        }
+
+        section {
+            margin: 2rem 0;
+            padding: 0 1rem;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            font-size: clamp(1.5rem, 3vw, 2rem);
+        }
+
+        /* Mobile Optimizations */
+        @media (max-width: 768px) {
+            .games-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                padding: 1rem;
+                gap: 1rem;
+            }
+
+            .advantages-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .advantage-card {
+                padding: 1rem;
+            }
+
+            .faq-item {
+                padding: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                margin: 1rem 0;
+            }
+
+            .brand, .faq {
+                padding: 0 0.5rem;
+            }
+        }
+
+        /* 添加滚动平滑效果 */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* 触摸设备优化 */
+        @media (hover: none) {
+            .game-card:hover {
+                transform: none;
+            }
+            
+            .game-card:active {
+                transform: scale(0.98);
+            }
+        }
+    </style>
 </head>
 <body>
-
-    <!-- Header -->
     <header>
-        <h1>Welcome to PopGame</h1>
-        <p>Your favorite online mini-games all in one place!</p>
+        <h1>Popgame</h1>
+        <p>Your Ultimate Destination for Online Gaming Fun</p>
     </header>
 
-    <!-- Brand Introduction -->
-    <section id="brand-intro">
-        <h2>About PopGame</h2>
-        <p>PopGame brings you a wide variety of entertaining online mini-games that you can play anytime, anywhere. No downloads, no hassle – just pure fun at your fingertips!</p>
+    <section class="brand">
+        <h2>Welcome to Popgame</h2>
+        <p>Popgame is your go-to destination for quick, fun, and engaging online games. Whether you have 5 minutes or 5 hours, we have the perfect game for you. Our collection features carefully curated games that are easy to play but hard to master.</p>
     </section>
 
-    <!-- Game Cards Section -->
-    <section id="games">
-        <h2>Explore Our Games</h2>
-        <div class="game-cards">
-            <!-- Sample game card, link to game page -->
-            <div class="game-card">
-                <a href="game1.html">
-                    <img src="game1-thumbnail.jpg" alt="Game 1 Thumbnail">
-                    <h3>Game Title 1</h3>
-                </a>
-                <p>A brief description of Game 1 goes here.</p>
+    <section>
+        <h2>Popular Games</h2>
+        <div class="games-grid">
+            <div class="game-card" onclick="location.href='/games/puzzle-master'">
+                <img src="/api/placeholder/250/160" alt="Puzzle Master">
+                <h3>Puzzle Master</h3>
             </div>
-            <div class="game-card">
-                <a href="game2.html">
-                    <img src="game2-thumbnail.jpg" alt="Game 2 Thumbnail">
-                    <h3>Game Title 2</h3>
-                </a>
-                <p>A brief description of Game 2 goes here.</p>
+            <div class="game-card" onclick="location.href='/games/speed-racer'">
+                <img src="/api/placeholder/250/160" alt="Speed Racer">
+                <h3>Speed Racer</h3>
             </div>
-            <!-- Add more game cards as needed -->
+            <div class="game-card" onclick="location.href='/games/memory-match'">
+                <img src="/api/placeholder/250/160" alt="Memory Match">
+                <h3>Memory Match</h3>
+            </div>
+            <div class="game-card" onclick="location.href='/games/color-blast'">
+                <img src="/api/placeholder/250/160" alt="Color Blast">
+                <h3>Color Blast</h3>
+            </div>
         </div>
     </section>
 
-    <!-- Our Advantages Section -->
-    <section id="advantages">
-        <h2>Why Choose PopGame?</h2>
-        <ul>
-            <li><strong>Instant Access:</strong> Enjoy games instantly, with no downloads required.</li>
-            <li><strong>Wide Variety:</strong> Discover a range of games to suit every taste.</li>
-            <li><strong>Play Anywhere:</strong> Accessible on any device with an internet connection.</li>
-            <li><strong>Free to Play:</strong> No cost, just pure fun.</li>
-        </ul>
+    <section class="advantages">
+        <h2>Why Choose Popgame?</h2>
+        <div class="advantages-grid">
+            <div class="advantage-card">
+                <h3>Free to Play</h3>
+                <p>All our games are completely free to play, no hidden charges or subscriptions required.</p>
+            </div>
+            <div class="advantage-card">
+                <h3>No Downloads</h3>
+                <p>Play instantly in your browser - no downloads or installations needed.</p>
+            </div>
+            <div class="advantage-card">
+                <h3>Regular Updates</h3>
+                <p>We constantly add new games and update existing ones for the best gaming experience.</p>
+            </div>
+            <div class="advantage-card">
+                <h3>Mobile Friendly</h3>
+                <p>Play seamlessly across all your devices - desktop, tablet, or mobile.</p>
+            </div>
+        </div>
     </section>
 
-    <!-- FAQ Section -->
-    <section id="faq">
+    <section class="faq">
         <h2>Frequently Asked Questions</h2>
         <div class="faq-item">
             <h3>Do I need to create an account to play?</h3>
-            <p>No, all our games are available to play instantly without the need to sign up.</p>
+            <p>No, you can start playing immediately without creating an account. However, creating an account allows you to save your progress and compete on leaderboards.</p>
         </div>
         <div class="faq-item">
-            <h3>Are the games free?</h3>
-            <p>Yes! All games on PopGame are free to play.</p>
+            <h3>Are the games suitable for children?</h3>
+            <p>Yes, all our games are family-friendly and suitable for players of all ages.</p>
         </div>
         <div class="faq-item">
-            <h3>Can I play on my mobile device?</h3>
-            <p>Absolutely! Our games are optimized for both desktop and mobile browsers.</p>
+            <h3>Can I play these games on my mobile device?</h3>
+            <p>Absolutely! All our games are optimized for mobile play and work great on smartphones and tablets.</p>
+        </div>
+        <div class="faq-item">
+            <h3>How often do you add new games?</h3>
+            <p>We add new games weekly and regularly update our existing collection to ensure the best gaming experience.</p>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
-        <p>&copy; 2024 PopGame. All rights reserved.</p>
+        <p>&copy; 2024 Popgame - All rights reserved</p>
     </footer>
-
 </body>
 </html>
